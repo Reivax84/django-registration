@@ -42,7 +42,7 @@ class RegistrationView(FormView):
 
     def form_valid(self, form):
         new_user = self.register(form)
-        success_url = self.get_success_url(new_user)
+        success_url = self.get_success_url(user=new_user, request=self.request)
 
         # success_url may be a simple string, or a tuple providing the
         # full argument set for redirect(). Attempting to unpack it
@@ -88,7 +88,7 @@ class ActivationView(TemplateView):
     def get(self, request, *args, **kwargs):
         activated_user = self.activate(*args, **kwargs)
         if activated_user:
-            success_url = self.get_success_url(activated_user)
+            success_url = self.get_success_url(user=activated_user, request=self.request)
             try:
                 to, args, kwargs = success_url
             except ValueError:
@@ -145,7 +145,7 @@ class ApprovalView(TemplateView):
     def get(self, request, *args, **kwargs):
         approved_user = self.approve(*args, **kwargs)
         if approved_user:
-            success_url = self.get_success_url(approved_user)
+            success_url = self.get_success_url(user=approved_user, request=self.request)
             try:
                 to, args, kwargs = success_url
             except ValueError:
