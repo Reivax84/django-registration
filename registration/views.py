@@ -42,7 +42,7 @@ class RegistrationView(FormView):
 
     def form_valid(self, form):
         new_user = self.register(form)
-        success_url = self.get_success_url(user=new_user, request=self.request)
+        success_url = self.get_success_url(new_user)
 
         # success_url may be a simple string, or a tuple providing the
         # full argument set for redirect(). Attempting to unpack it
